@@ -6,7 +6,7 @@ import { Tab } from "@headlessui/react";
 import { Image } from "@/types";
 
 import GalleryTab from "./gallery-tab";
-
+import { getStrapiMedia } from "@/utils/api-helpers";
 interface GalleryProps {
   images: Image[];
 }

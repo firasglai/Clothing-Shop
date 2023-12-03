@@ -101,10 +101,10 @@ const Footer = () => {
       <p className="text-center py-2 text-[#888888] text-[9px]">
         Built by{" "}
         <Link
-          href="https://github.com/OgaDavid"
+          href="https://github.com/firasglai"
           className="underline italic hover:text-white"
         >
-          Oga David.
+          Firas glai.
         </Link>
       </p>
     </div>

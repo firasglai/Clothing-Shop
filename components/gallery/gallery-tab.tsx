@@ -3,7 +3,7 @@ import { Tab } from "@headlessui/react";
 
 import { cn } from "@/lib/utils";
 import { Image } from "@/types";
-
+import { getStrapiMedia } from "@/utils/api-helpers";
 interface GalleryTabProps {
   image: Image;
 }
