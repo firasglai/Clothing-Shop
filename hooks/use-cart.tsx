@@ -7,7 +7,7 @@ import { Product } from "@/types";
 interface CartStore {
   items: Product[];
   addItem: (data: Product) => void;
-  removeItem: (id: string) => void;
+  removeItem: (id: number) => void;
   removeAll: () => void;
 }
 
@@ -26,7 +26,7 @@ const useCart = create(
         set({ items: [...get().items, data] });
         toast.success("Item added to cart.");
       },
-      removeItem: (id: string) => {
+      removeItem: (id: number) => {
         set({ items: [...get().items.filter((item) => item.id !== id)] });
         toast.success("Item removed from cart.");
       },

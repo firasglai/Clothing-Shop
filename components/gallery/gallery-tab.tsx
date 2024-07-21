@@ -18,9 +18,10 @@ const GalleryTab: React.FC<GalleryTabProps> = ({
       {({ selected }) => (
         <div>
           <span className="absolute h-full w-full aspect-square inset-0 overflow-hidden rounded-md">
+           //TODO: Add Placeholders
             <NextImage 
               fill 
-              src={image.url} 
+              src={getStrapiMedia(image.attributes.url) || "/path/to/default/image"}  
               alt="" 
               className="object-cover object-center" 
             />

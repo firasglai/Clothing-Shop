@@ -1,7 +1,7 @@
-import {getCategory , getCategory2Billbaord}  from "@/actions/get-category";
-import getColors from "@/actions/get-colors";
-import {getProducts,getProductsByCategory} from "@/actions/get-products";
-import getSizes from "@/actions/get-sizes";
+import {getCategory , getCategory2Billbaord}  from "@/actions/categories/get-category";
+import getColors from "@/actions/products/get-colors";
+import {getProducts,getProductsByCategory} from "@/actions/products/get-products";
+import getSizes from "@/actions/products/get-sizes";
 import { Billboard } from "@/components/billboard";
 import Container from "@/components/ui/container";
 import Filter from "./components/filter";
@@ -30,13 +30,14 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   //console.log("products", products)
   const sizes = await getSizes();
   const colors = await getColors();
-  console.log("CategoryID: ", params.categoryId)
+  // console.log("Colors : ",colors);
+  // console.log("Sizes: " , sizes);
   const categoryResponse = await getCategory(params.categoryId);
   const category = categoryResponse.data;
   const productsResponse = await getProductsByCategory(params.categoryId);
   const products = productsResponse.data;
  // console.log("products", products)
-  console.log("ONE Category: ", category.attributes.billboard)
+  // console.log("ONE Category: ", category.attributes.billboard)
  // console.log("Category Response",categoryResponse)
   return (
     <div className="bg-white">

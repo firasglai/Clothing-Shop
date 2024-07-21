@@ -6,7 +6,7 @@ import IconButton from "@/components/ui/icon-button";
 import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/use-cart";
 import { Product } from "@/types";
-
+import { getStrapiMedia } from "@/utils/api-helpers";
 interface CartItemProps {
   data: Product;
 }
@@ -14,6 +14,11 @@ interface CartItemProps {
 const CartItem: React.FC<CartItemProps> = ({ data }) => {
   const cart = useCart();
 
+// console.log("cartData",data);
+
+
+const { name, price, size, color, gallery } = data?.attributes;
+// console.log("cartDataImage",data.attributes);
   const onRemove = () => {
     cart.removeItem(data.id);
   };
@@ -23,7 +28,7 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
       <div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">
         <Image
           fill
-          src={data.images[0].url}
+          src={(gallery && gallery.data && gallery.data[0] ? getStrapiMedia(gallery.data[0].attributes.url) : null) ?? "/images/placeholder.jpg"}
           alt=""
           className="object-cover object-center"
         />
@@ -34,16 +39,16 @@ const CartItem: React.FC<CartItemProps> = ({ data }) => {
         </div>
         <div className="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
           <div className="flex justify-between">
-            <p className=" text-lg font-semibold text-black">{data.name}</p>
+            <p className=" text-lg font-semibold text-black">{name}</p>
           </div>
 
           <div className="mt-1 flex text-sm">
-            <p className="text-gray-500">{data.color.name}</p>
+            <p className="text-gray-500">{color.data.attributes.name}</p>
             <p className="ml-4 border-l border-gray-200 pl-4 text-gray-500">
-              {data.size.name}
+              {size.data.attributes.name}
             </p>
           </div>
-          <Currency value={data.price} />
+          <Currency value={price} />
         </div>
       </div>
     </li>

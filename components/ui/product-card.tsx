@@ -15,7 +15,6 @@ interface ProductCard {
 }
 
 const ProductCard: React.FC<ProductCard> = ({ data }) => {
-  //console.log("Image URL:", data.attributes.images[0]?.attributes.url);
   const previewModal = usePreviewModal();
   const cart = useCart();
   const router = useRouter();
@@ -35,11 +34,14 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
 
     cart.addItem(data);
   };
-  //? Deconstructing response
-  const { name, price, description, size, color, category } = data?.attributes;
-  //console.log("Product Card Data:", data);  
-  //? Binding url with local provider
-  const imageUrl = getStrapiMedia(data.attributes.image1.data.attributes.url);
+  const { name, price, description, size, color, category, gallery } =
+    data?.attributes;
+ 
+  let imageUrl;
+  if (gallery && gallery.data && gallery.data.length > 0) {
+    imageUrl = getStrapiMedia(gallery.data[0].attributes.url);
+  }
+
   return (
     <div
       onClick={handleClick}
@@ -47,16 +49,13 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
     >
       {/* Image & actions */}
       <div className="aspect-square rounded-xl bg-gray-100 relative">
-      {imageUrl && (
-         <Image
-         src={imageUrl}
+        <Image
+          src={imageUrl || "/images/placeholder-small.jpg"}
           alt="Product Image"
           fill
           className="aspect-square object-cover rounded-md"
-       
         />
-      )}
-       
+
         <div className="opacity-0 group-hover:opacity-100 transition absolute w-full px-6 bottom-5">
           <div className="flex gap-x-6 justify-center">
             <IconButton
@@ -73,15 +72,13 @@ const ProductCard: React.FC<ProductCard> = ({ data }) => {
       {/* Name */}
       <div>
         <p className="font-semibold text-lg">{name}</p>
-        <p className="text-sm text-gray-500">Category Name</p>
+        <p className="text-sm text-gray-500">{category.data.attributes.name}</p>
       </div>
       {/* Price & Review */}
       <div className="flex items-center justify-between">
         <Currency value={price} />
       </div>
-      <div className="mt-4 text-[#f6b400] text-l tracking-[2px]">
-        ★★★★★
-      </div>
+      <div className="mt-4 text-[#f6b400] text-l tracking-[2px]">★★★★★</div>
     </div>
   );
 };

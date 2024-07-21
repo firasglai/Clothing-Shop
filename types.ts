@@ -1,14 +1,31 @@
-
+//! SINGLE CATEGRORY RESPONSE IS DEPRECATED
+// export interface Image {
+//   data: {
+//     id: number;
+//     attributes: {
+//       name: string;
+//       createdAt: string;
+//       updatedAt: string;
+//       url: string;
+//     };
+//   };
+// }
 export interface Image {
-  data: {
-    id: number;
-    attributes: {
-      name: string;
-      createdAt: string;
-      updatedAt: string;
-      url: string;
+  id: number;
+  attributes: {
+    name: string;
+    alternativeText: string | null;
+    caption: string | null;
+    url: string;
+    formats: {
+      small: Format;
+      thumbnail: Format;
     };
   };
+}
+
+export interface Format {
+  url: string;
 }
 export interface Billboard {
   data:{
@@ -19,19 +36,22 @@ export interface Billboard {
       updatedAt: string;
       publishedAt: string;
       imageUrl: Image;
-    };
+    };  
   }
 }
 
 export interface Category {
-  id: number;
-  attributes: {
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-    publishedAt: string;
-    billboard: Billboard;
-  };
+  data:{
+    id: number;
+    attributes: {
+      name: string;
+      createdAt: string;
+      updatedAt: string;
+      publishedAt: string;
+      billboard: Billboard;
+    };
+  }
+ 
 }
 export interface CategoryResponse {
   data: Category[];
@@ -82,14 +102,16 @@ export interface Color {
 export interface Product {
   id: number;
   attributes: {
-    category: Category; // TODO: One To One
+    category: Category; 
     description: string;
     name: string;
-    price: string; // TODO: Decimal
-    size: Size; // TODO: One To One
-    color: Color; // TODO: One To One
+    price: string; 
+    size: Size; 
+    color: Color; 
     isFeatured: boolean;
-    image1: Image;
+    gallery: {
+      data: Image[];
+    };
   };
 }
 //? images.data[].attributes.url

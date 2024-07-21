@@ -41,7 +41,7 @@ export const getProductsByCategory2 = async (categoryId: number): Promise<Produc
 //! to refactor
 export const getProductsByCategory = async (categoryId: number): Promise<ProductsResponse> => {
   try {
-    const path = `/products?populate=image1,color,size&filters[category][id][$eq]=${categoryId}`;
+    const path = `/products?populate=*&filters[category][id][$eq]=${categoryId}`;
     const urlParamsObject = {
       populate: 'image1,color,size'// Add any other parameters if needed
     };
@@ -91,7 +91,7 @@ export const getFeaturedProducts = async (): Promise<Product[]> => {
   const data = await res.json();
   //console.log("Data from the response",data);
   const products: Product[] = data.data;
-  //console.log("Categories",products.map(product => product.attributes.category.data.attributes.name));
+  // console.log("Iages",products.map(product => product.attributes.gallery.attributes.url));
   return products;
 };
 

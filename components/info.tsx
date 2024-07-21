@@ -14,6 +14,8 @@ interface InfoProps {
 const Info: React.FC<InfoProps> = ({ data }) => {
   const cart = useCart();
 
+  console.log("Product Info Data:", data);
+
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation();
 

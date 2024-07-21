@@ -1,4 +1,4 @@
-import {getProducts , getFeaturedProducts} from "@/actions/get-products";
+import {getProducts , getFeaturedProducts} from "@/actions/products/get-products";
 import ProductList from "@/components/product-list";
 import Container from "@/components/ui/container";
 import { cn } from "@/lib/utils";
@@ -31,7 +31,7 @@ const HomePage = async () => {
                     FuturaCondensedExtraBold.className
                   )}
                 >
-                  NIKE SHOP
+                  TUNISIAN THRIFT SHOP
                 </h1>
                 <p className="max-w-[500px]">
                   Welcome to the ultimate destination for athletic excellence,
@@ -62,6 +62,7 @@ const HomePage = async () => {
               </div>
             </div>
             <div>
+              {/* //TODO: change to a dynamic banner */}
               <Image
                 className=""
                 width={800}
@@ -74,8 +75,7 @@ const HomePage = async () => {
           </div>
         </div>
         <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
-       <ProductList title="Featured Products" items={products} />
-   
+       <ProductList title="Featured Products" items={products} /> 
         </div>
       </div>
     </Container>

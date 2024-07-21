@@ -3,7 +3,7 @@ import { fetchAPI } from "@/utils/fetch-api";
 const URL = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}/categories`;
 import qs from "query-string";
 
-export const getCategory = async ( id: number ): Promise<SingleCategoryResponse> => {
+export const getCategory = async ( id: number ): Promise<Category> => {
   try {
   const url = `${URL}/${id}`+`?populate[billboard][populate][0]=imageUrl`;
    // console.log("Loading category from", url);

@@ -1,5 +1,5 @@
 import { Billboard as BillboardType } from "@/types";
-import getBillboard from "@/actions/get-billboard";
+import getBillboard from "@/actions/bilboards/get-billboard";
 import { getStrapiMedia } from "@/utils/api-helpers";
 interface BillboardProps {
   data: BillboardType;
@@ -7,10 +7,11 @@ interface BillboardProps {
 
 
 // TODO: ADD the Populate query to the Billboard component get the id and pass it to BaseURL?populate=imageUrl
+//TODO: FIX TS error
 export const Billboard: React.FC<BillboardProps> = ({ data }) => {
   const imageUrl = getStrapiMedia(data?.data.attributes.imageUrl.data.attributes.url);
-  console.log("Billbaord data from Category: ", data)
-  console.log("Billboard Image",data?.data.attributes.imageUrl.data.attributes.url)
+ // console.log("Billbaord data from Category: ", data)
+  //console.log("Billboard Image",data?.data.attributes.imageUrl.data.attributes.url)
   return (
     <div className="p-4 sm:p-6 lg:p-8 rounded-xl overflow-hidden">
       <div

@@ -2,13 +2,13 @@
 import Container from "@/components/ui/container";
 import Link from "next/link";
 import MainNav from "@/components/main-nav";
-import getCategories from "@/actions/get-categories";
+import getCategories from "@/actions/categories/get-categories";
 import NavbarActions from "@/components/navbar-actions";
 
 const Navbar = async () => {
   //? categories is an array Category[]
   const categories = await getCategories();
-  //console.log("data from categories" , categories)
+ // console.log("data from Navbar" , categories.data.attributes.name);
   // console.log("categories Names", categories.map(categories => categories.data.attributes.name));
   return (
     <div className="border-b">

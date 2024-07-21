@@ -10,7 +10,7 @@ interface MainNavProps {
 const MainNav: React.FC<MainNavProps> = ({ data }) => {
   const pathName = usePathname();
   const categories = data.data;
-
+  
   const routes = categories.map((route) => ({
     id: route.id,
     href: `/category/${route.id}`,
