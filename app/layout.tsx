@@ -37,6 +37,7 @@ const BRFrima = localFont({
   ],
 });
 
+//TODO: Change the metadata to match your website
 export const metadata: Metadata = {
   title: {
     default: "Nike. Just Do It. Nike.com",

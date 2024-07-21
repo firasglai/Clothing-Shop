@@ -15,9 +15,7 @@ export const getCategory = async ( id: number ): Promise<Category> => {
     console.error(error);
     throw new Error('Failed to fetch Categories. Please check your network connection.');
   }
- 
 };
-
 
 //using the qs Library to populate Images from the Billboard ?populate[billboard][populate][0]=imageUrl
 

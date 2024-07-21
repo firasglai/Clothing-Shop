@@ -1,4 +1,6 @@
 
+
+//TODO: Refactor to use dynamic urlParamsObject using the query object
     import qs from "query-string";
     import { getStrapiURL , getBackendURL} from "./api-helpers";
     

@@ -15,7 +15,7 @@ export const getProductsByCategory2 = async (categoryId: number): Promise<Produc
   try {
     const path = '/products';
     const urlParamsObject = {
-      populate: 'image1,color,size',
+      populate: 'gallery,color,size',
       filters: {
         category: {
           id: {
@@ -23,7 +23,6 @@ export const getProductsByCategory2 = async (categoryId: number): Promise<Produc
           },
         },
       },
-      // Add any other parameters if needed
     };
 
     const decodedQuery = qs.stringify(urlParamsObject, { encode: false });
@@ -38,15 +37,25 @@ export const getProductsByCategory2 = async (categoryId: number): Promise<Produc
   }
 };
 
-//! to refactor
-export const getProductsByCategory = async (categoryId: number): Promise<ProductsResponse> => {
+//! to refactor to qs string
+export const getProductsByCategory = async (categoryId: number, sizeId?: number, colorId?: number): Promise<ProductsResponse> => {
   try {
-    const path = `/products?populate=*&filters[category][id][$eq]=${categoryId}`;
+    let path = `/products?populate=*&filters[category][id][$eq]=${categoryId}`;
+
+    if (sizeId) {
+      path += `&filters[size][id][$eq]=${sizeId}`;
+    }
+
+    if (colorId) {
+      path += `&filters[color][id][$eq]=${colorId}`;
+    }
+
     const urlParamsObject = {
-      populate: 'image1,color,size'// Add any other parameters if needed
+      populate: 'gallery,color,size' 
     };
+    console.log("path", path);
+
     const responseData: ProductsResponse = await fetchAPI(path);
-   // console.log("the products response from category", responseData);
     return responseData;
   } catch (error) {
     console.error(error);

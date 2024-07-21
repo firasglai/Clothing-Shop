@@ -35,7 +35,9 @@ export interface Billboard {
       createdAt: string;
       updatedAt: string;
       publishedAt: string;
-      imageUrl: Image;
+      imageUrl: {
+        data: Image;
+      };
     };  
   }
 }
@@ -77,25 +79,19 @@ export interface SingleCategoryResponse {
 }
 }
 
-
-
-
-export interface Size {
-  data: {
-    id: number;
-    attributes: {
-      name: string;
-      value: string;
-    };
+export interface Color {
+  id: number;
+  attributes: {
+    name: string;
+    value: string;
   };
 }
-export interface Color {
-  data: {
-    id: number;
-    attributes: {
-      name: string;
-      value: string;
-    };
+
+export interface Size {
+  id: number;
+  attributes: {
+    name: string;
+    value: string;
   };
 }
 
@@ -106,8 +102,12 @@ export interface Product {
     description: string;
     name: string;
     price: string; 
-    size: Size; 
-    color: Color; 
+    size: {
+      data: Size;
+    }; 
+    color: {
+      data: Color;
+    };
     isFeatured: boolean;
     gallery: {
       data: Image[];

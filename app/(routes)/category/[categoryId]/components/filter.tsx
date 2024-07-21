@@ -2,7 +2,7 @@
 
 import qs from "query-string";
 import { useRouter, useSearchParams } from "next/navigation";
-
+import React , { useEffect } from "react";
 import Button from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Color, Size } from "@/types";
@@ -14,23 +14,29 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
+
+
+  // console.log("Filter Props", data);
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const selectedValue = searchParams.get(valueKey);
 
-  const onClick = (id: string) => {
-    const current = qs.parse(searchParams.toString());
+  const onClick = (id: number) => {
 
+    // const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    const current = qs.parse(searchParams.toString());
+    const idStr = id.toString();
+  
     const query = {
       ...current,
-      [valueKey]: id,
+      [valueKey]: idStr,
     };
-
-    if (current[valueKey] === id) {
+  
+    if (current[valueKey] === idStr) {
       query[valueKey] = null;
     }
-
+  
     const url = qs.stringifyUrl(
       {
         url: window.location.href,
@@ -38,7 +44,8 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
       },
       { skipNull: true }
     );
-
+   
+  
     router.push(url);
   };
 
@@ -52,11 +59,11 @@ const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
             <Button
               className={cn(
                 "rounded-md text-sm text-gray-800 p-2 bg-white border border-gray-300",
-                selectedValue === filter.id && "bg-black text-white"
+                selectedValue === filter.id.toString() && "bg-black text-white"
               )}
               onClick={() => onClick(filter.id)}
             >
-              {filter.name}
+              {filter.attributes.name}
             </Button>
           </div>
         ))}

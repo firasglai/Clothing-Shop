@@ -1,6 +1,6 @@
 import {getCategory , getCategory2Billbaord}  from "@/actions/categories/get-category";
 import getColors from "@/actions/products/get-colors";
-import {getProducts,getProductsByCategory} from "@/actions/products/get-products";
+import {getProductsByCategory} from "@/actions/products/get-products";
 import getSizes from "@/actions/products/get-sizes";
 import { Billboard } from "@/components/billboard";
 import Container from "@/components/ui/container";
@@ -34,11 +34,13 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
   // console.log("Sizes: " , sizes);
   const categoryResponse = await getCategory(params.categoryId);
   const category = categoryResponse.data;
-  const productsResponse = await getProductsByCategory(params.categoryId);
+  const productsResponse = await getProductsByCategory(params.categoryId, searchParams.sizeId, searchParams.colorId);
   const products = productsResponse.data;
  // console.log("products", products)
   // console.log("ONE Category: ", category.attributes.billboard)
  // console.log("Category Response",categoryResponse)
+//  console.log("Sizes",sizes);
+//  console.log("Colors",colors);
   return (
     <div className="bg-white">
       <Container>
@@ -47,10 +49,8 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({
           <div className="lg:grid lg:grid-cols-5 lg:gap-x-8">
             <MobileFilters sizes={sizes} colors={colors}/>
             <div className="hidden lg:block">
-           {/*   <Filter valueKey="sizeId" name="Sizes" data={sizes} /> 
-                <Filter valueKey="colorId" name="Colors" data={colors} />
-           */}
-             
+             <Filter valueKey="sizeId" name="Sizes" data={sizes} /> 
+                <Filter valueKey="colorId" name="Colors" data={colors} />  
             </div>
             <div className="mt-6 lg:col-span-4 lg:mt-0">
               {products.length === 0 && <NoResults />}

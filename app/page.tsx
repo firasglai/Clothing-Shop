@@ -62,7 +62,7 @@ const HomePage = async () => {
               </div>
             </div>
             <div>
-              {/* //TODO: change to a dynamic banner */}
+           
               <Image
                 className=""
                 width={800}
@@ -74,6 +74,9 @@ const HomePage = async () => {
             </div>
           </div>
         </div>
+        {/* <div className="">
+        <Shader />
+        </div> */}
         <div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
        <ProductList title="Featured Products" items={products} /> 
         </div>
